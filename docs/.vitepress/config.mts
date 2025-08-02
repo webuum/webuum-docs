@@ -64,6 +64,10 @@ export default defineConfig({
             {
               text: 'Props',
               link: '/docs/props'
+            },
+            {
+              text: 'Dispatch',
+              link: '/docs/dispatch'
             }
           ]
         },

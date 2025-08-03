@@ -72,3 +72,43 @@ customElements.define('x-hello-world', class extends WebuumElement {
 :::
 
 You’ve just created your first Webuum component — built on native APIs, ready for production, and weighing less than a kilobyte.
+
+## Trying Webuum Online
+
+On [StackBlitz](https://stackblitz.com/) or [GitHub](https://github.com/webuum/webuum/tree/main/examples) with basic examples how to use it with [Vite](https://vitejs.dev/) or other frameworks.
+
+<style>
+    #trying-winduum-online a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    #trying-winduum-online a svg {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    .dark #trying-winduum-online a svg {
+        fill: #fff;
+    }
+
+    @media all and (max-width: 720px) {
+        #trying-winduum-online {
+            display: block !important;
+            gap: 3rem !important;
+        }
+    }
+</style>
+
+<div id="trying-winduum-online" style="display: flex; gap: 6rem; font-size: 1.125rem;">
+<div>
+
+* <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/vite" target="_blank" rel="noreferrer">vite <svg><use href="#icon-sb" /></svg></a>
+* <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/astro" target="_blank" rel="noreferrer">astro<svg><use href="#icon-sb" /></svg></a>
+* <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/laravel" target="_blank" rel="noreferrer">laravel <svg><use href="#icon-sb" /></svg></a>
+* <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/rails" target="_blank" rel="noreferrer">rails <svg><use href="#icon-sb" /></svg></a>
+* <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/nette" target="_blank" rel="noreferrer">nette <svg><use href="#icon-sb" /></svg></a>
+
+</div>
+</div>

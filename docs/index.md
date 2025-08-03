@@ -1,11 +1,10 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
   name: "Webuum"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  text: "The only JS framework you need"
+  tagline: "Made for websites — not web apps.<br>When the platform is 95% of what you need."
   actions:
     - theme: brand
       text: Get started
@@ -18,11 +17,27 @@ hero:
       link: https://github.com/webuum/webuum
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
----
+  - title: Native
+    icon: 🧬
+    details: Built entirely on top of native Web Components and platform APIs — no virtual DOM, no runtime magic.
 
+  - title: Small
+    icon: 🪶
+    details: Only 0.5 kB gzipped. That's 25× smaller than Stimulus, with all the power you actually need.
+
+  - title: Fast
+    icon: ⚡
+    details: Optimized for server-rendered websites and instant interactivity. Load only what you use — nothing more.
+
+  - title: Declarative
+    icon: 🔖
+    details: Use HTML-first patterns for props, parts, and behavior — all powered by attributes and native APIs.
+
+  - title: Frameworkless
+    icon: 🧩
+    details: Works with any SSR backend — PHP, Astro, Laravel, Rails, whatever. No bundler or build step required.
+
+  - title: Extensible
+    icon: 🛠️
+    details: Plug in Signals, LitHtml, or custom logic only when needed. Webuum won’t get in your way.
+---

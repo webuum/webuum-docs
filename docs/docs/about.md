@@ -45,7 +45,7 @@ And that's (mostly) it.
 
 ## The Power of the Web Platform
 
-Modern browsers already provide native components like `<dialog>`, `<details>`, popovers, and more. These often require no additional JavaScript to work, giving you powerful building blocks right out of the box.
+Modern browsers already provide native components like `<dialog>`, `<details>`, popovers, view-transitions, and more. These often require no additional JavaScript to work, giving you powerful building blocks right out of the box.
 
 Webuum builds on this foundation — adding just the minimal layer needed to enhance interactivity without reinventing the wheel.
 

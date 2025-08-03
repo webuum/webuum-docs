@@ -29,7 +29,7 @@ export default defineConfig({
           text: 'Get started',
           items: [
             {
-              text: 'Install',
+              text: 'Installation',
               link: '/docs/'
             },
             {

@@ -5,6 +5,9 @@ hero:
   name: "Webuum"
   text: "The only JS framework you need"
   tagline: "When the platform is 95% of what you need.<br>Made for websites — not web apps."
+  image:
+    src: /logo.svg
+    alt: Winduum
   actions:
     - theme: brand
       text: Get started

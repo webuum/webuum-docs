@@ -137,3 +137,23 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+.VPHero .image-bg {
+  opacity: 0.4;
+  animation: logo 6s infinite;
+}
+
+.VPHomeSponsors .message {
+  max-width: 550px;
+}
+
+@keyframes logo {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}

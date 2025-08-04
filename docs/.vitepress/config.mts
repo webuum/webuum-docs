@@ -77,10 +77,6 @@ export default defineConfig({
             {
               text: 'Polyfills',
               link: '/docs/polyfills'
-            },
-            {
-              text: 'Components',
-              link: '/docs/components'
             }
           ]
         },

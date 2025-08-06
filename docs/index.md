@@ -26,7 +26,7 @@ features:
 
   - title: Small
     icon: 🪶
-    details: Only 0.5 kB gzipped. That's 25× smaller than Stimulus, with all the power you actually need.
+    details: Only 1 kB gzipped. That's 12× smaller than Stimulus, with all the power you actually need.
 
   - title: Fast
     icon: ⚡

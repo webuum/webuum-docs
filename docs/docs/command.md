@@ -184,3 +184,52 @@ customElements.define('x-custom-popover', class extends WebuumElement {
 - Use command for simple action buttons and `addEventListener` for everything else.
 - Event listeners on or inside a host element don't need to be removed on disconnect, these on outside (eg. window) should be though
 - Event listeners on child elements should be defined on [Part](/docs/parts) elements and their connected callbacks, so they work even on disconnecting inside the custom element (eg. ajax reload)
+
+## Command in Shadow DOM
+
+When using the command attribute inside a Shadow DOM, Webuum provides built-in support to make the behavior predictable and scoped:
+- If the button **does not have a commandfor attribute**, Webuum will automatically register the command **on the custom element host**.
+- If the button **has a commandfor attribute**, the command will target an element **inside the same shadow root** with the given id.
+
+This allows you to use clean and simple markup inside your custom elements without manually wiring event listeners to the host.
+
+::: code-group
+```html
+<x-my-component>
+  <template shadowrootmode="open">
+    <button command="saveData">Save</button>
+  </template>
+</x-my-component>
+```
+```js
+class MyComponent extends WebuumElement {
+    saveData() {
+        console.log('Saving...');
+    }
+}
+```
+:::
+
+Webuum will detect the button and automatically bind the `saveData` method on the host when the button is clicked.
+
+If you instead want to scope the command to another element inside the same shadow root, simply provide `commandfor="targetId"`:
+
+```html
+<x-my-component>
+    <template shadowrootmode="open">
+        <button command="toggle-popover" commandfor="hintPopover">Hint</button>
+        
+        <x-popover id="hintPopover" popover>
+          You forgot something!
+        </x-popover>
+    </template>
+</x-my-component>
+```
+
+| Scenario                                 | Behavior                                                             |
+|------------------------------------------|----------------------------------------------------------------------|
+| No `commandfor`                          | Command is dispatched to the custom element host                     |
+| `commandfor` pointing to local ID        | Command is dispatched to the matching element inside the shadow root |
+| `commandfor` pointing outside shadow DOM | ❌ Not supported (due to Shadow DOM scoping restrictions)             |
+
+This design keeps the component encapsulated while still allowing full flexibility for advanced structures.

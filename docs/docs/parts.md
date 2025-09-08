@@ -1,0 +1,146 @@
+# Parts
+
+Working with DOM nodes inside a custom element can get messy — especially when you need to repeatedly query selectors with querySelector or getElementById. Webuum introduces a Parts system that makes this much simpler and more maintainable.
+
+Parts are essentially named references to DOM elements inside your component. They work similarly to ref in Vue or @ViewChild in Angular, but are based entirely on web standards.
+
+## Defining Parts
+
+Each part in Webuum is declared inside the static parts map of your component.
+By default, the key (e.g. $foo) is used as the part name in the DOM. But you can also map it to a custom name.
+
+```js
+static parts = {
+    $foo: null,      // expects part="foo" (shadow DOM) or data-x-hello-world-part="foo" (light DOM)
+    $bar: 'hello',   // maps $bar to part="hello" / data-x-hello-world-part="hello"
+}
+```
+
+This makes it possible to keep JavaScript variable names short and consistent, while still using semantic names in your HTML.
+
+### Multiple matches
+If there are multiple elements with the same part name, Webuum will return an array of elements instead of a single reference.
+
+```html
+<div data-x-hello-world-part="foo"></div>
+<div data-x-hello-world-part="foo"></div>
+```
+```js
+this.$foo // → [<div part="foo">, <div part="foo">]
+```
+
+### Multiple names
+A single element can expose multiple part names:
+
+```html
+<div part="foo bar baz"></div>
+```
+
+In this case, the element will be available under each matching key in your component.
+
+## Light DOM
+
+In the light DOM (outside shadow roots), parts are defined using a `data-[element-name]-part` attribute.
+The prefix ensures that parts are scoped to the right custom element and avoids collisions with other components.
+
+For example, for a custom element `<x-hello-world>`, you can declare a part like this:
+
+```html
+<x-hello-world>
+  <div data-x-hello-world-part="foo">Hello!</div>
+</x-hello-world>
+```
+
+In your component, you declare the part in the static parts map:
+
+::: code-group
+```js
+import { WebuumElement } from 'webuum'
+
+customElements.define('x-hello-world', class extends WebuumElement {
+    static parts = {
+      $foo: null,
+    }
+
+    connectedCallback() {
+      console.log(this.$foo) // <div data-x-hello-world-part="foo">
+    }
+  }
+)
+```
+```ts
+import { WebuumElement } from 'webuum'
+
+customElements.define('x-hello-world', class extends WebuumElement {
+    declare $foo: HTMLElement | null
+    
+    static parts = {
+      $foo: null,
+    }
+
+    connectedCallback() {
+      console.log(this.$foo) // <div data-x-hello-world-part="foo">
+    }
+  }
+)
+```
+:::
+
+This way, $foo is automatically bound to the `<div>` without writing any query selectors manually.
+
+## Shadow DOM
+In the shadow DOM, parts are declared using the standard part attribute.
+Webuum automatically binds them to your component according to the static parts map.
+
+```html
+<template shadowrootmode="open">
+  <div part="foo">Hello from shadow DOM!</div>
+</template>
+```
+
+## Lifecycle Callbacks
+Sometimes you need to run logic when a part becomes available (inserted into the DOM) or when it gets removed.
+Webuum provides connected and disconnected callbacks for each declared part.
+
+::: code-group
+```js
+import { WebuumElement } from 'webuum'
+
+customElements.define('x-hello-world', class extends WebuumElement {
+    static parts = {
+      $foo: null,
+    }
+
+    $fooConnectedCallback(element) {
+      console.log('foo connected', element)
+    }
+
+    $fooDisconnectedCallback(element) {
+      console.log('foo disconnected', element)
+    }
+  }
+)
+```
+```ts
+import { WebuumElement } from 'webuum'
+
+customElements.define('x-hello-world', class extends WebuumElement {
+    declare $foo: HTMLElement | null
+    
+    static parts = {
+      $foo: null,
+    }
+    
+    $fooConnectedCallback(element) {
+        console.log('foo connected', element)
+    }
+
+    $fooDisconnectedCallback(element) {
+        console.log('foo disconnected', element)
+    }
+  }
+)
+```
+:::
+
+When `<div part="foo">` is added or removed, the respective callback will fire with the element reference as an argument.

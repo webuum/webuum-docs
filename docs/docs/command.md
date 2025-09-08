@@ -41,6 +41,7 @@ class LoginForm extends WebuumElement {
 - The event must be a click on a `<button>` element – other elements are ignored.
 - Commands are resolved only if the method exists on the target element; otherwise nothing happens.
 - All events are prevent defaulted by default
+- `commandfor` can be omitted if the command is defined in the host element, webuum internally attaches the command to the host element.
 
 > Native command names like `close` or `show-modal` do not use the `--` prefix, and do not require a matching method – they trigger native behavior (e.g., closing a `<dialog>`).
 
@@ -82,9 +83,9 @@ The method name must match the native command (`showPopover`, `close`, `show`, e
 - If your element does not inherit from the native element (e.g. not `<dialog>` or not using `popover`), the native method call will have no effect.
 - In these cases, no -- prefix is needed, since you’re extending a native command.
 
-> Native commands do not require JavaScript at all – they work purely declaratively using HTML. So extend then only when needed.
+> Native commands do not require JavaScript at all – they work purely declaratively using HTML. So extend them only when needed.
 
-## Passing values with value attribute
+## Passing values with a value attribute
 
 Commands can accept values directly from the triggering element using the `value=""` attribute. These values are passed to the handler method in your custom element.
 

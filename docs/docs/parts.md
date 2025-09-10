@@ -18,23 +18,49 @@ static parts = {
 
 This makes it possible to keep JavaScript variable names short and consistent, while still using semantic names in your HTML.
 
+::: code-group
+```html [Light DOM]
+<div data-x-hello-world-part="foo"></div>
+<div data-x-hello-world-part="hello"></div>
+```
+```html [Shadow DOM]
+<div part="foo"></div>
+<div part="hello"></div>
+```
+:::
+```js
+this.$foo // → element
+this.$bar // → element
+```
+
 ### Multiple matches
 If there are multiple elements with the same part name, Webuum will return an array of elements instead of a single reference.
 
-```html
+::: code-group
+```html [Light DOM]
 <div data-x-hello-world-part="foo"></div>
 <div data-x-hello-world-part="foo"></div>
 ```
+```html [Shadow DOM]
+<div part="foo"></div>
+<div part="foo"></div>
+```
+:::
 ```js
-this.$foo // → [<div part="foo">, <div part="foo">]
+this.$foo // → [element, element]
 ```
 
 ### Multiple names
 A single element can expose multiple part names:
 
-```html
+::: code-group
+```html [Light DOM]
+<div data-x-hello-world-part="foo bar baz"></div>
+```
+```html [Shadow DOM]
 <div part="foo bar baz"></div>
 ```
+:::
 
 In this case, the element will be available under each matching key in your component.
 

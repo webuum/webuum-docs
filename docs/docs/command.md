@@ -10,7 +10,7 @@ This API is currently supported in Chrome, with support coming to other browsers
 
 Custom events triggered via the `command` attribute are mapped to methods on the element referenced by `commandfor`. These event names must be prefixed with `--` to indicate that they are custom-defined (unlike native commands like `close`, `show-modal`, etc.).
 
-> 📘 See [MDN’s button element command reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#command) for more on native commands
+> See [MDN’s button element command reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#command) for more on native commands
 
 ### Example
 
@@ -42,11 +42,10 @@ class LoginForm extends WebuumElement {
 - Commands are resolved only if the method exists on the target element; otherwise nothing happens.
 - All events are prevent defaulted by default
 - `commandfor` can be omitted if the command is defined in the host element, webuum internally attaches the command to the host element.
-
-> Native command names like `close` or `show-modal` do not use the `--` prefix, and do not require a matching method – they trigger native behavior (e.g., closing a `<dialog>`).
+- Native command names like `close` or `show-modal` do not use the `--` prefix, and do not require a matching method – they trigger native behavior (e.g., closing a `<dialog>`).
 
 ## Extending native methods
-You can extend native methods such as togglePopover() in your custom element by defining a method with the same name and calling super.methodName() to preserve the native behavior.
+You can extend native methods such as `togglePopover()` in your custom element by defining a method with the same name and calling `super.methodName()` to preserve the native behavior.
 
 This is useful when you want to enhance or hook into built-in functionality while still keeping native behavior intact.
 
@@ -81,9 +80,8 @@ The method name must match the native command (`showPopover`, `close`, `show`, e
 - You must call `super.method()` to retain the native behavior, otherwise only your custom logic will run.
 - Native methods work only on elements that support them – e.g. `showPopover()` on elements with the popover attribute, `close()` on `<dialog>`, etc.
 - If your element does not inherit from the native element (e.g. not `<dialog>` or not using `popover`), the native method call will have no effect.
-- In these cases, no -- prefix is needed, since you’re extending a native command.
-
-> Native commands do not require JavaScript at all – they work purely declaratively using HTML. So extend them only when needed.
+- In these cases, no `--` prefix is needed, since you’re extending a native command. 
+- Native commands do not require JavaScript at all – they work purely declaratively using HTML. So extend them only when needed.
 
 ## Passing values with a value attribute
 
@@ -135,14 +133,15 @@ This makes passing structured data easy and predictable.
 - The value is passed under `event.source.value`
 - Arrays and Objects must be valid JSON
 - You can still access the triggering element via `event.source`
-
-> For working with additional values or element state, consider using the [Props](/docs/props) feature.
+- For working with additional values or element state, consider using the [Props](/docs/props) feature.
 
 ## When to use addEventListener instead of command
 The command attribute only works on native `<button>` elements and only for the `command` (click) event.
 If you want to handle other event types (such as `input`, `change`, `keydown`, etc.), you must use `addEventListener`.
 
 This also applies when you want to listen to events on other elements like `<input>`, `<select>`, or custom internal parts of your component.
+
+Rather than creating new declarative APIs for each event type in HTML, we chose to use the native event system to keep the HTML clean and simple.
 
 ### Example
 
@@ -227,10 +226,10 @@ If you instead want to scope the command to another element inside the same shad
 </x-my-component>
 ```
 
-| Scenario                                 | Behavior                                                             |
-|------------------------------------------|----------------------------------------------------------------------|
-| No `commandfor`                          | Command is dispatched to the custom element host                     |
+| Scenario                                 | Behavior                                                           |
+|------------------------------------------|--------------------------------------------------------------------|
+| No `commandfor`                          | Command is dispatched to the custom element host                   |
 | `commandfor` pointing to local ID        | Command is dispatched to the matching element inside the shadow root |
-| `commandfor` pointing outside shadow DOM | ❌ Not supported (due to Shadow DOM scoping restrictions)             |
+| `commandfor` pointing outside shadow DOM | Not supported (due to Shadow DOM scoping restrictions)             |
 
 This design keeps the component encapsulated while still allowing full flexibility for advanced structures.

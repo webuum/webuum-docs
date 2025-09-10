@@ -11,11 +11,11 @@ Most JS frameworks today are built with applications in mind. But many websites 
 
 Webuum was designed from a different angle:
 
-- ✅ **Native first** – Uses custom elements and web standards.
-- ✅ **Small footprint** – Less than 0.5kB gzipped.
-- ✅ **Enhances server-rendered HTML** — JavaScript adds interactivity without overhead.
-- ✅ **No build step required** – But plays well with bundlers.
-- ✅ **Minimal API surface** – You only need what the platform doesn’t already do well.
+- **Native first** – Uses custom elements and web standards.
+- **Small footprint** – Only 1kB gzipped.
+- **Enhances server-rendered HTML** — JavaScript adds interactivity without overhead.
+- **No build step required** – But plays well with bundlers.
+- **Minimal API surface** – You only need what the platform doesn’t already do well.
  
 ## Why not use React, Vue, or similar?
 
@@ -25,9 +25,10 @@ Even modern meta-frameworks like Astro or Qwik try to address the issue — but 
 
 Webuum is for cases where:
 
-- HTML is already rendered on the server.
+- HTML is already rendered on the server — like Astro, Laravel, or Rails.
+- You don't need state management, hydration, or a client runtime.
 - You only need small enhancements or isolated interactivity.
-- You care about **PageSpeed**, **performance**, and **control**.
+- You care about **PageSpeed** and **performance**
 
 ## The Platform is Enough (Almost)
 
@@ -36,16 +37,15 @@ Modern web APIs are powerful. Webuum just fills in the small gaps.
 Some things are still verbose or cumbersome in plain JS — like working with attributes, events, or DOM refs. Webuum introduces a minimal layer:
 
 - `props` – typed attributes via `data-*`.
-- `parts` – scoped DOM references for light & shadow DOM.
-- `command` – declarative event bindings via native Command API.
-- `dispatch` – simplified event handling and communication.
+- `parts` – scoped DOM references for **Light DOM** & **Shadow DOM**.
+- `command` – declarative event bindings via native **Command API**.
 - `WebuumElement` – an extended base class for Custom Elements.
 
 And that's (mostly) it.
 
 ## The Power of the Web Platform
 
-Modern browsers already provide native components like `<dialog>`, `<details>`, popovers, view-transitions, and more. These often require no additional JavaScript to work, giving you powerful building blocks right out of the box.
+Modern browsers already provide native components like `<dialog>`, `<details>`, **popovers**, **view-transitions**, and more. These often require no additional JavaScript to work, giving you powerful building blocks right out of the box.
 
 Webuum builds on this foundation — adding just the minimal layer needed to enhance interactivity without reinventing the wheel.
 
@@ -61,7 +61,7 @@ When you outgrow the basics, you can gradually layer in:
 
 ## When to use Webuum
 
-Use Webuum if your answer to most of these is “yes”:
+Use Webuum if your answer to most of these is **“yes”**:
 
 - Do you server-render HTML?
 - Do you want native components, but hate boilerplate?

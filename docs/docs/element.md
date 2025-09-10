@@ -6,10 +6,9 @@ Webuum builds on top of Custom Elements by offering a minimal, modern base class
 
 This unlocks access to everything Webuum provides — including:
 
-- ✅ Built-in support for custom [command](/docs/command) actions.
-- ✅ Automatic [parts](/docs/parts) mapping
-- ✅ Easy [props](/docs/props) from data attributes
-- ✅ A simple `dispatch()` utility
+- Built-in support for custom [command](/docs/command) actions.
+- Automatic [parts](/docs/parts) mapping
+- Easy [props](/docs/props) from data attributes
 
 Here’s how a typical component looks:
 
@@ -86,7 +85,7 @@ This lets you keep native behaviors like the built-in modal behavior — while s
 ### Why this matters
 By enhancing native elements instead of replacing them:
 - You retain accessibility and behavior by default.
-- You can use browser features like :modal, showModal(), or native form controls.
+- You can use browser features like `showModal()`, or native form controls.
 - You avoid reimplementing things that the browser already does well.
 
 ## Composition Definition

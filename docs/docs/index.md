@@ -22,6 +22,22 @@ import { WebuumElement } from 'webuum'
 import { WebuumElement } from 'https://cdn.jsdelivr.net/npm/webuum/+esm'
 ```
 
+### Via CDN with importmap
+::: code-group
+```js
+import { WebuumElement } from 'webuum'
+```
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "webuum": "https://cdn.jsdelivr.net/npm/webuum/+esm"
+    }
+  }
+</script>
+```
+:::
+
 ## Hello World Example
 
 A minimal custom element using Webuum.

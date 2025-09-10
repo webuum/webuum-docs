@@ -99,29 +99,29 @@ export default defineConfig({
               text: 'Props',
               link: '/docs/props'
             },
-            {
-              text: 'Dispatch',
-              link: '/docs/dispatch'
-            }
+            // {
+            //   text: 'Dispatch',
+            //   link: '/docs/dispatch'
+            // }
           ]
         },
-        {
-          text: 'Tutorials',
-          items: [
-            {
-              text: 'Managing events',
-              link: '/docs/managing-events'
-            },
-            {
-              text: 'Managing state',
-              link: '/docs/managing-state'
-            },
-            {
-              text: 'Extending with Lit',
-              link: '/docs/extending-with-lit'
-            }
-          ]
-        },
+        // {
+        //   text: 'Tutorials',
+        //   items: [
+        //     {
+        //       text: 'Managing events',
+        //       link: '/docs/managing-events'
+        //     },
+        //     {
+        //       text: 'Managing state',
+        //       link: '/docs/managing-state'
+        //     },
+        //     {
+        //       text: 'Extending with Lit',
+        //       link: '/docs/extending-with-lit'
+        //     }
+        //   ]
+        // },
       ]
     },
 

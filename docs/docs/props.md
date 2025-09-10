@@ -1,7 +1,7 @@
 # Props
 
 Props in Webuum are a simple way to define basic reactive properties on your custom elements.
-They let you pass data from the DOM into your component using data-attributes, with automatic type conversion.
+They let you pass data from the DOM into your component using `data-attributes`, with automatic type conversion.
 
 ## Defining Props
 

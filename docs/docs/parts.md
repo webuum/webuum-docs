@@ -1,8 +1,8 @@
 # Parts
 
-Working with DOM nodes inside a custom element can get messy — especially when you need to repeatedly query selectors with querySelector or getElementById. Webuum introduces a Parts system that makes this much simpler and more maintainable.
+Working with DOM nodes inside a custom element can get messy — especially when you need to repeatedly query selectors with `querySelector` or `getElementById`. Webuum introduces a Parts system that makes this much simpler and more maintainable.
 
-Parts are essentially named references to DOM elements inside your component. They work similarly to ref in Vue or @ViewChild in Angular, but are based entirely on web standards.
+Parts are essentially named references to DOM elements inside your component. They work similarly to `ref` in Vue, but are based entirely on web standards.
 
 ## Defining Parts
 

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
 const ogDescription = 'When the platform is 95% of what you need. Made for websites — not web apps.'
 const ogImage = 'https://webuum.dev/og-image.png'
@@ -139,5 +140,15 @@ export default defineConfig({
       message: `Released under the MIT License.`,
       copyright: 'Copyright © 2025-present lubomirblazek.cz'
     },
+  },
+  markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin)
+    },
+  },
+  vite: {
+    plugins: [
+      groupIconVitePlugin()
+    ],
   }
 })

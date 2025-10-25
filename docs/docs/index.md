@@ -38,10 +38,10 @@ import { WebuumElement } from 'https://cdn.jsdelivr.net/npm/webuum/dist/index.js
 
 ### Via CDN with importmap
 ::: code-group
-```js
+```js [example.js]
 import { WebuumElement } from 'webuum'
 ```
-```html
+```html [example.html]
 <script type="importmap">
   {
     "imports": {
@@ -57,7 +57,7 @@ import { WebuumElement } from 'webuum'
 A minimal custom element using Webuum.
 
 ::: code-group
-```js
+```js [example.js]
 import { WebuumElement } from 'webuum'
 
 customElements.define('x-hello-world', class extends WebuumElement {
@@ -74,7 +74,7 @@ customElements.define('x-hello-world', class extends WebuumElement {
   }
 })
 ```
-```ts
+```ts [example.ts]
 import { WebuumElement } from 'webuum'
 
 customElements.define('x-hello-world', class extends WebuumElement {
@@ -94,7 +94,7 @@ customElements.define('x-hello-world', class extends WebuumElement {
   }
 })
 ```
-```html
+```html [example.html]
 <x-hello-world data-buu="Hello world">
     <span data-x-hello-world-part="custom-name"></span>
 </x-hello-world>

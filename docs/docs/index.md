@@ -7,20 +7,20 @@ You can use Webuum with or without a bundler — it's designed to be as native a
 ### Via package manager
 
 ::: code-group
-```bash
+```bash [npm]
 npm install webuum
 ```
-```bash
+```bash [Yarn]
 yarn add webuum
 ```
-```bash
+```bash [pnpm]
 pnpm add webuum
 ```
-```bash
-deno install npm:webuum
-```
-```bash
+```bash [Bun]
 bun install webuum
+```
+```bash [Deno]
+deno install npm:webuum
 ```
 :::
 

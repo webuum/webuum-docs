@@ -4,11 +4,25 @@ You can use Webuum with or without a bundler — it's designed to be as native a
 
 ## Installation
 
-### Via npm
+### Via package manager
 
+::: code-group
 ```bash
 npm install webuum
 ```
+```bash
+yarn add webuum
+```
+```bash
+pnpm add webuum
+```
+```bash
+deno install npm:webuum
+```
+```bash
+bun install webuum
+```
+:::
 
 Then import it in your JavaScript:
 
@@ -19,7 +33,7 @@ import { WebuumElement } from 'webuum'
 ### Via CDN
 
 ```js
-import { WebuumElement } from 'https://cdn.jsdelivr.net/npm/webuum/+esm'
+import { WebuumElement } from 'https://cdn.jsdelivr.net/npm/webuum/dist/index.js'
 ```
 
 ### Via CDN with importmap
@@ -31,7 +45,7 @@ import { WebuumElement } from 'webuum'
 <script type="importmap">
   {
     "imports": {
-      "webuum": "https://cdn.jsdelivr.net/npm/webuum/+esm"
+      "webuum": "https://cdn.jsdelivr.net/npm/webuum/dist/index.js"
     }
   }
 </script>

@@ -18,7 +18,7 @@ export default defineConfig({
     ['meta', { property: 'og:url', content: ogUrl }],
     ['meta', { property: 'og:description', content: ogDescription }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:site', content: '@winduum_dev' }],
+    ['meta', { name: 'twitter:site', content: '@webuum_dev' }],
     ['meta', { name: 'theme-color', content: '#f14a29' }],
     ['script', { defer: '', 'data-domain': 'webuum.dev', src: 'https://plausible.newlogic.cz/js/script.outbound-links.js'}]
   ],

@@ -2,7 +2,7 @@
 
 Webuum integrates the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API), a new browser standard for declaratively wiring UI actions directly in HTML via `<button>`, without relying on `addEventListener`.
 
-This API is currently supported in Chrome, with support coming to other browsers soon. See the [polyfills](/docs/polyfills) page for more info.
+This API is currently supported in **Chrome** and **Firefox** with support coming to other browsers soon. See the [polyfills](/docs/polyfills) page for more info.
 
 ## Mapping custom events to methods
 

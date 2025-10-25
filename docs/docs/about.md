@@ -30,6 +30,8 @@ Webuum is for cases where:
 - You only need small enhancements or isolated interactivity.
 - You care about **PageSpeed** and **performance**
 
+Take an example from [@tailwindplus/elements](https://tailwindcss.com/blog/vanilla-js-support-for-tailwind-plus), for basic UIs the web components are a perfect fit.
+
 ## The Platform is Enough (Almost)
 
 Modern web APIs are powerful. Webuum just fills in the small gaps.
@@ -45,7 +47,7 @@ And that's (mostly) it.
 
 ## The Power of the Web Platform
 
-Modern browsers already provide native components like `<dialog>`, `<details>`, **popovers**, **view-transitions**, and more. These often require no additional JavaScript to work, giving you powerful building blocks right out of the box.
+Modern browsers already provide native components like `<dialog>`, `<details>`, **popovers**, **view-transitions**, command and more. These often require no additional JavaScript to work, giving you powerful building blocks right out of the box.
 
 Webuum builds on this foundation — adding just the minimal layer needed to enhance interactivity without reinventing the wheel.
 
@@ -57,6 +59,7 @@ When you outgrow the basics, you can gradually layer in:
 
 - [**Signals API**](https://github.com/tc39/proposal-signals), a TC39 proposal, which can be polyfilled today.
 - [**Lit**](https://lit.dev/) or other libraries — if your components get more complex.
+- [Remix](https://remix.run/blog/remix-jam-2025-recap) upcoming Remix 3 event system might be perfect fit.
 - Your own small utilities, exactly where you need them.
 
 ## When to use Webuum
@@ -64,7 +67,7 @@ When you outgrow the basics, you can gradually layer in:
 Use Webuum if your answer to most of these is **“yes”**:
 
 - Do you server-render HTML?
-- Do you want native components, but hate boilerplate?
+- Do you want native components but hate boilerplate?
 - Do you prefer **progressive enhancement** over full hydration?
 - Do you want to keep JS minimal and optional?
 - Do you care about **performance** and **maintainability**?
@@ -92,4 +95,4 @@ Webuum came out of this need.
 It’s not revolutionary. It’s not trying to replace React or Vue.  
 It’s trying to do one thing well: make writing interactive **websites** better, simpler, and lighter.
 
-If that resonates with you — welcome aboard.
+If that resonates with you — **welcome aboard**.

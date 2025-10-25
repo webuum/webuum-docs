@@ -10,7 +10,7 @@ The key is the property name (prefixed with `$`), and the value is its default v
 
 ```js
 static props = {
-    $buu: 'test',   // default value
+  $buu: 'test',   // default value
 }
 ```
 

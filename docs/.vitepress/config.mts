@@ -132,7 +132,7 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/webuum/webuum' },
-      { icon: 'twitter', link: 'https://x.com/webuum_dev' }
+      { icon: 'x', link: 'https://x.com/webuum_dev' }
     ],
 
     footer: {

@@ -7,16 +7,16 @@ Parts are essentially named references to DOM elements inside your component. Th
 ## Defining Parts
 
 Each part in Webuum is declared inside the static parts map of your component.
-By default, the key (e.g. $foo) is used as the part name in the DOM. But you can also map it to a custom name.
+By default, the key (e.g., `$foo`) is used as the part name in the DOM. But you can also map it to a custom name.
 
 ```js
 static parts = {
-    $foo: null,      // expects part="foo" (shadow DOM) or data-x-hello-world-part="foo" (light DOM)
-    $bar: 'hello',   // maps $bar to part="hello" / data-x-hello-world-part="hello"
+  $foo: null,      // expects part="foo" (shadow DOM) or data-x-hello-world-part="foo" (light DOM)
+  $bar: 'hello',   // maps $bar to part="hello" / data-x-hello-world-part="hello"
 }
 ```
 
-This makes it possible to keep JavaScript variable names short and consistent, while still using semantic names in your HTML.
+This makes it possible to keep JavaScript variable names short and consistent while still using semantic names in your HTML.
 
 ::: code-group
 ```html [Light DOM]
@@ -29,8 +29,8 @@ This makes it possible to keep JavaScript variable names short and consistent, w
 ```
 :::
 ```js
-this.$foo // → element
-this.$bar // → element
+this.$foo // → HTMLElement
+this.$bar // → HTMLElement
 ```
 
 ### Multiple matches
@@ -47,7 +47,7 @@ If there are multiple elements with the same part name, Webuum will return an ar
 ```
 :::
 ```js
-this.$foo // → [element, element]
+this.$foo // → [HTMLElement, HTMLElement]
 ```
 
 ### Multiple names
@@ -112,7 +112,7 @@ customElements.define('x-hello-world', class extends WebuumElement {
 ```
 :::
 
-This way, $foo is automatically bound to the `<div>` without writing any query selectors manually.
+This way, `$foo` is automatically bound to the `<div>` without writing any query selectors manually.
 
 ## Shadow DOM
 In the shadow DOM, parts are declared using the standard part attribute.
@@ -124,9 +124,9 @@ Webuum automatically binds them to your component according to the static parts 
 </template>
 ```
 
-## Lifecycle Callbacks
+## Mutation Callbacks
 Sometimes you need to run logic when a part becomes available (inserted into the DOM) or when it gets removed.
-Webuum provides connected and disconnected callbacks for each declared part.
+Webuum provides mutation callbacks for each declared part.
 
 ::: code-group
 ```js
@@ -137,12 +137,11 @@ customElements.define('x-hello-world', class extends WebuumElement {
       $foo: null,
     }
 
-    $fooConnectedCallback(element) {
-      console.log('foo connected', element)
-    }
-
-    $fooDisconnectedCallback(element) {
-      console.log('foo disconnected', element)
+    partMutationCallback(name, removedElement, addedElement) {
+      if (name === '$foo') {
+        console.log('foo connected', addedElement)
+        console.log('foo disconnected', removedElement) 
+      }
     }
   }
 )
@@ -156,17 +155,16 @@ customElements.define('x-hello-world', class extends WebuumElement {
     static parts = {
       $foo: null,
     }
-    
-    $fooConnectedCallback(element) {
-        console.log('foo connected', element)
-    }
 
-    $fooDisconnectedCallback(element) {
-        console.log('foo disconnected', element)
+    partMutationCallback(name: string, removedElement: HTMLElement, addedElement: HTMLElement) {
+      if (name === '$foo') {
+        console.log('foo connected', addedElement)
+        console.log('foo disconnected', removedElement)
+      }
     }
   }
 )
 ```
 :::
 
-When `<div part="foo">` is added or removed, the respective callback will fire with the element reference as an argument.
+When `<div part="foo">` is added or removed, the callback will fire with the element reference as an argument.

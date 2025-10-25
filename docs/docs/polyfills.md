@@ -16,7 +16,7 @@ Webuum supports the [Invoker Commands API](https://developer.mozilla.org/en-US/d
 </dialog>
 ```
 
-This is already supported in **Chromium**, **Safari Technology Preview**, and **coming to Firefox** (currently behind a flag) — full support is near.
+This is already supported in **Chrome**, **Firefox** and **Safari Technology Preview** — full support is near.
 
 To support all browsers today, you can use [`invokers-polyfill`](https://www.npmjs.com/package/invokers-polyfill).
 
@@ -51,7 +51,7 @@ customElements.define('x-dialog', class extends HTMLDialogElement {
 
 This lets you enhance native features without breaking semantics or accessibility. It’s ideal when you want to extend something like `<dialog>` instead of recreating it from scratch.
 
-Unfortunately, Safari does not support this feature and has explicitly [declined to implement&nbsp;it](https://github.com/WebKit/standards-positions/issues/97#issuecomment-1674083477).
+Unfortunately, **Safari** does not support this feature and has explicitly [declined to implement&nbsp;it](https://github.com/WebKit/standards-positions/issues/97#issuecomment-1674083477).
 
 To ensure compatibility, you can use [@webreflection/custom-elements-builtin](https://www.npmjs.com/package/@webreflection/custom-elements-builtin).
 

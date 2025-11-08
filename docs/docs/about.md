@@ -51,6 +51,8 @@ Modern browsers already provide native components like `<dialog>`, `<details>`, 
 
 Webuum builds on this foundation — adding just the minimal layer needed to enhance interactivity without reinventing the wheel.
 
+Take an example from [webuum](https://stackblitz.com/github/webuum/webuum/tree/main/examples/vite) example on StackBlitz. It uses the `holy trinity of native components`: **popover**, **tooltip**, and **dialog**. All completely native API's, minimum JavaScript.
+
 ## What if I need more?
 
 Webuum doesn’t compete with bigger tools — it complements them.

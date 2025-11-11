@@ -2,6 +2,10 @@
 
 You can use Webuum with or without a bundler — it's designed to be as native and lightweight as possible.
 
+::: warning
+This is a pre-release version. Use in production with caution — the API's may still change before the stable release.
+:::
+
 ## Installation
 
 ### Via package manager

@@ -5,8 +5,8 @@ They let you pass data from the DOM into your component using `data-attributes`,
 
 ## Defining Props
 
-Props are declared in the `static props` map of your component.
-The key is the property name (prefixed with `$`), and the value is its default value.
+Props are declared in the `static props` map of your component. Each key is prefixed with a `$` for unambiguous reference in your component, you can also use a custom prefix if you like.
+The key is the property name, and the value is its default value.
 
 ```js
 static props = {

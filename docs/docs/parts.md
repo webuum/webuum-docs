@@ -6,7 +6,7 @@ Parts are essentially named references to DOM elements inside your component. Th
 
 ## Defining Parts
 
-Each part in Webuum is declared inside the static parts map of your component.
+Props are declared in the `static parts` map of your component. Each key is prefixed with a `$` for unambiguous reference in your component, you can also use a custom prefix if you like.
 By default, the key (e.g., `$foo`) is used as the part name in the DOM. But you can also map it to a custom name.
 
 ```js

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import llmstxt from "vitepress-plugin-llms";
 
 const ogDescription = 'When the platform is 95% of what you need. Made for websites — not web apps.'
 const ogImage = 'https://webuum.dev/og-image.png'
@@ -8,6 +9,9 @@ const ogUrl = 'https://webuum.dev'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  vite: {
+    plugins: [llmstxt()],
+  },
   title: "Webuum",
   description: ogDescription,
 

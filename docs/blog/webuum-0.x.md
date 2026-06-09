@@ -21,6 +21,8 @@ head:
 
 # Building Astro Websites with Almost No JavaScript - Introducing Webuum v0.x
 
+![Introducing Webuum v0.x](/og-image.png)
+
 For the past few years, we've been building websites with Astro and other server-rendered stacks.
 
 Astro solved one of the biggest problems of modern frontend development: shipping too much JavaScript to the browser. Instead of hydrating entire pages, Astro lets us keep most of a website as HTML and only add JavaScript where it is actually needed.
@@ -360,5 +362,3 @@ Our goal isn't to build another JavaScript framework.
 Our goal is to help people build better websites with the platform they already have.
 
 If you're building Astro projects, working with Web Components, or interested in progressive enhancement, we'd love to hear your feedback.
-
-Welcome to Webuum v0.x Alpha.

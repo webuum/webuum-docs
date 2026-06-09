@@ -10,7 +10,7 @@ head:
       content: website
   - - meta
     - property: og:title
-      content: Introducing Webuum v0.x
+      content: Building Astro Websites with Almost No JavaScript - Introducing Webuum v0.x
   - - meta
     - property: og:url
       content: https://webuum.dev/blog/webuum-0.x.html

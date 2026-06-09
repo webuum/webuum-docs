@@ -306,6 +306,8 @@ Astro gives you the page architecture.
 
 Webuum gives you a small native-first layer for the interactive pieces inside that architecture.
 
+You can try that combination in the [Astro extended example on StackBlitz](https://stackblitz.com/github/webuum/webuum/tree/main/examples/astro-extended).
+
 ## Alpha Means Alpha
 
 Webuum v0.x is an alpha release.

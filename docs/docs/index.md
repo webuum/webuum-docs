@@ -141,6 +141,7 @@ On [StackBlitz](https://stackblitz.com/) or [GitHub](https://github.com/webuum/w
 * <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/vanilla" target="_blank" rel="noreferrer">vanilla <svg><use href="#icon-sb" /></svg></a>
 * <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/vite" target="_blank" rel="noreferrer">vite <svg><use href="#icon-sb" /></svg></a>
 * <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/astro" target="_blank" rel="noreferrer">astro<svg><use href="#icon-sb" /></svg></a>
+* <a href="https://stackblitz.com/github/webuum/webuum/tree/main/examples/astro-extended" target="_blank" rel="noreferrer">astro extended<svg><use href="#icon-sb" /></svg></a>
 
 </div>
 </div>

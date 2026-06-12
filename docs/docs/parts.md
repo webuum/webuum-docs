@@ -6,7 +6,7 @@ Parts are essentially named references to DOM elements inside your component. Th
 
 ## Defining Parts
 
-Props are declared in the `static parts` map of your component. Each key is prefixed with a `$` for unambiguous reference in your component, you can also use a custom prefix if you like.
+Parts are declared in the `static parts` map of your component. Each key is prefixed with a `$` for unambiguous reference in your component, you can also use a custom prefix if you like.
 By default, the key (e.g., `$foo`) is used as the part name in the DOM. But you can also map it to a custom name.
 
 ```js
@@ -115,8 +115,7 @@ customElements.define('x-hello-world', class extends WebuumElement {
 This way, `$foo` is automatically bound to the `<div>` without writing any query selectors manually.
 
 ## Shadow DOM
-In the shadow DOM, parts are declared using the standard part attribute.
-Webuum automatically binds them to your component according to the static parts map.
+In the shadow DOM, parts are declared using the standard `part` attribute — without the element-name prefix, since the shadow root is already scoped to your component.
 
 ```html
 <template shadowrootmode="open">
@@ -124,9 +123,30 @@ Webuum automatically binds them to your component according to the static parts 
 </template>
 ```
 
-## Mutation Callbacks
+The `static parts` map covers the light DOM of the host element. To bind parts inside a shadow root, call `defineParts` (and `definePartsObserver` if you want the part callbacks) on the shadow root:
+
+```js
+import { WebuumElement, defineParts, definePartsObserver } from 'webuum'
+
+customElements.define('x-hello-world', class extends WebuumElement {
+    constructor() {
+      super()
+
+      const shadowParts = defineParts(this.shadowRoot, {
+        $foo: null,
+      })
+
+      definePartsObserver(this.shadowRoot, shadowParts)
+    }
+  }
+)
+```
+
+## Part Callbacks
 Sometimes you need to run logic when a part becomes available (inserted into the DOM) or when it gets removed.
-Webuum provides mutation callbacks for each declared part.
+Webuum provides `partConnectedCallback` and `partDisconnectedCallback` for that.
+
+Both callbacks receive the part name as the first argument — the key from the `static parts` map, including the `$` prefix — and the element reference as the second argument.
 
 ::: code-group
 ```js
@@ -137,10 +157,15 @@ customElements.define('x-hello-world', class extends WebuumElement {
       $foo: null,
     }
 
-    partMutationCallback(name, removedElement, addedElement) {
+    partConnectedCallback(name, element) {
       if (name === '$foo') {
-        console.log('foo connected', addedElement)
-        console.log('foo disconnected', removedElement) 
+        console.log('foo connected', element)
+      }
+    }
+
+    partDisconnectedCallback(name, element) {
+      if (name === '$foo') {
+        console.log('foo disconnected', element)
       }
     }
   }
@@ -156,10 +181,15 @@ customElements.define('x-hello-world', class extends WebuumElement {
       $foo: null,
     }
 
-    partMutationCallback(name: string, removedElement: HTMLElement, addedElement: HTMLElement) {
+    partConnectedCallback(name: string, element: HTMLElement) {
       if (name === '$foo') {
-        console.log('foo connected', addedElement)
-        console.log('foo disconnected', removedElement)
+        console.log('foo connected', element)
+      }
+    }
+
+    partDisconnectedCallback(name: string, element: HTMLElement) {
+      if (name === '$foo') {
+        console.log('foo disconnected', element)
       }
     }
   }
@@ -167,4 +197,4 @@ customElements.define('x-hello-world', class extends WebuumElement {
 ```
 :::
 
-When `<div part="foo">` is added or removed, the callback will fire with the element reference as an argument.
+When `<div data-x-hello-world-part="foo">` is added, `partConnectedCallback` fires — and when it is removed, `partDisconnectedCallback` fires. `partConnectedCallback` also fires for parts that are already present in the DOM when the component initializes.

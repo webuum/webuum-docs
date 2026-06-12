@@ -149,9 +149,9 @@ customElements.define('x-hello-world', class extends HTMLDivElement {
 ```
 ```html
 <div is="x-hello-world" data-buu="Hello there!">
-  <span data-x-hello-world-part="fuu">Light DOM part</span>
+  <span data-x-hello-world-part="foo">Light DOM part</span>
   <template shadowrootmode="open">
-    <span part="foo">Shadow DOM part</span>
+    <span part="fuu">Shadow DOM part</span>
   </template>
 </div>
 ```

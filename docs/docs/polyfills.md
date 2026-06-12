@@ -8,7 +8,7 @@ To keep the runtime small, **polyfills are opt-in and can be lazy-loaded** based
 
 Webuum supports the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) which introduces a native way to declaratively bind element actions (including custom actions) using a command attribute — without custom event listeners or JavaScript wiring.
 
-```js
+```html
 <button commandfor="mydialog" command="show-modal">Show modal dialog</button>
 <dialog id="mydialog">
   <button commandfor="mydialog" command="close">Close</button>
@@ -16,9 +16,9 @@ Webuum supports the [Invoker Commands API](https://developer.mozilla.org/en-US/d
 </dialog>
 ```
 
-This is already supported in **Chrome**, **Firefox** and **Safari Technology Preview** — full support is near.
+Since December 2025 this API is [Baseline Newly available](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) — it works in the latest versions of all major browsers.
 
-To support all browsers today, you can use [`invokers-polyfill`](https://www.npmjs.com/package/invokers-polyfill).
+To support older browser versions, you can use [`invokers-polyfill`](https://www.npmjs.com/package/invokers-polyfill).
 
 ```shell
 npm install invokers-polyfill
@@ -56,7 +56,7 @@ Unfortunately, **Safari** does not support this feature and has explicitly [decl
 To ensure compatibility, you can use [@webreflection/custom-elements-builtin](https://www.npmjs.com/package/@webreflection/custom-elements-builtin).
 
 ```shell
-npm install invokers-polyfill
+npm install @webreflection/custom-elements-builtin
 ```
 
 Then lazy-load it when needed using Webuum’s built-in feature detection:

@@ -82,7 +82,7 @@ customElements.define('x-hello-world', class extends WebuumElement {
 import { WebuumElement } from 'webuum'
 
 customElements.define('x-hello-world', class extends WebuumElement {
-  declare $foo: HTMLElement | nul
+  declare $foo: HTMLElement | null
   declare $buu: string | null
     
   static parts = {

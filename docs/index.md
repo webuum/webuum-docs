@@ -7,7 +7,7 @@ hero:
   tagline: "Made for websites — not web apps."
   image:
     src: /logo.svg
-    alt: Winduum
+    alt: Webuum
   actions:
     - theme: brand
       text: Get started

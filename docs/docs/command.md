@@ -2,7 +2,7 @@
 
 Webuum integrates the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API), a new browser standard for declaratively wiring UI actions directly in HTML via `<button>`, without relying on `addEventListener`.
 
-This API is currently supported in **Chrome** and **Firefox** with support coming to other browsers soon. See the [polyfills](/docs/polyfills) page for more info.
+This API is [Baseline Newly available](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) since December 2025 — it works in the latest versions of all major browsers. For older browser versions, see the [polyfills](/docs/polyfills) page.
 
 ## Mapping custom events to methods
 
@@ -22,7 +22,7 @@ Custom events triggered via the `command` attribute are mapped to methods on the
 class LoginForm extends WebuumElement {
     submitForm(event) {
         console.log('Logging in…')
-        constole.log(event.source) // original event target - <button>
+        console.log(event.source) // original event target - <button>
     }
 }
 ```
@@ -53,12 +53,12 @@ This is useful when you want to enhance or hook into built-in functionality whil
 ```html
 <button command="toggle-popover" commandfor="hintPopover">Hint</button>
 
-<x-popover id="hintPopover" popover>
+<x-hint-popover id="hintPopover" popover>
   You forgot something!
-</x-popover>
+</x-hint-popover>
 ```
 ```js
-customElements.define('x-hint-popover', class extends HTMLElement {
+customElements.define('x-hint-popover', class extends WebuumElement {
     togglePopover(event) {
         // Custom logic before showing
         console.log('Popover is about to be shown')
@@ -91,21 +91,21 @@ Commands can accept values directly from the triggering element using the `value
 ```html
 <x-counter id="counter"></x-counter>
 
-<button command="increment" commandfor="counter" value="5">
+<button command="--increment" commandfor="counter" value="5">
   Add 5
 </button>
 ```
 ```js
-customElements.define('x-counter', class extends HTMLElement {
-    $value = 0
+customElements.define('x-counter', class extends WebuumElement {
+    $count = 0
     
     connectedCallback() {
-        this.textContent = this.$value
+        this.textContent = this.$count
     }
     
     increment({ source }) {
-        this.$value += source.value
-        this.textContent = this.$value
+        this.$count += source.$value
+        this.textContent = this.$count
     }
 })
 ```
@@ -128,7 +128,7 @@ The value passed via `value=""` is automatically typecast into the appropriate J
 This makes passing structured data easy and predictable.
 
 #### Notes
-- The value is passed under `event.source.value`
+- The typecast value is available under `event.source.$value` — the raw string stays in `event.source.value`
 - Arrays and Objects must be valid JSON
 - You can still access the triggering element via `event.source`
 - For working with additional values or element state, consider using the [Props](/docs/props) feature.
@@ -145,27 +145,31 @@ Rather than creating new declarative APIs for each event type in HTML, we chose 
 
 ::: code-group
 ```js
-customElements.define('x-custom-popover', class extends WebuumElement {
+customElements.define('x-popover', class extends WebuumElement {
     $open = false
     
     static parts = {
         $input: null
     }
 
+    hide = () => this.hidePopover()
+
     connectedCallback() {
         this.addEventListener('toggle', (event) => {
             this.$open = event.newState === 'open'
         })
         
-        window.addEventListener('resize', super.hidePopover)
+        window.addEventListener('resize', this.hide)
     }
     
-    disconnected() {
-        window.removeEventListener('resize', super.hidePopover)
+    disconnectedCallback() {
+        window.removeEventListener('resize', this.hide)
     }
     
-    $inputConnectedCallback(element) {
-        element.addEventListener('change', super.hidePopover)
+    partConnectedCallback(name, element) {
+        if (name === '$input') {
+            element.addEventListener('change', this.hide)
+        }
     }
 })
 ```
@@ -185,26 +189,35 @@ customElements.define('x-custom-popover', class extends WebuumElement {
 
 ## Command in Shadow DOM
 
-When using the command attribute inside a Shadow DOM, Webuum provides built-in support to make the behavior predictable and scoped:
+When using the command attribute inside a Shadow DOM, Webuum provides support to make the behavior predictable and scoped:
 - If the button **does not have a commandfor attribute**, Webuum will automatically register the command **on the custom element host**.
 - If the button **has a commandfor attribute**, the command will target an element **inside the same shadow root** with the given id.
 
 This allows you to use clean and simple markup inside your custom elements without manually wiring event listeners to the host.
 
+`WebuumElement` observes only the light DOM of the host automatically — to enable this behavior inside a shadow root, call `defineCommandObserver` on the shadow root:
+
 ::: code-group
 ```html
 <x-my-component>
   <template shadowrootmode="open">
-    <button command="saveData">Save</button>
+    <button command="--save-data">Save</button>
   </template>
 </x-my-component>
 ```
 ```js
-class MyComponent extends WebuumElement {
-    saveData() {
-        console.log('Saving...');
+import { WebuumElement, defineCommandObserver } from 'webuum'
+
+customElements.define('x-my-component', class extends WebuumElement {
+    constructor() {
+        super()
+        defineCommandObserver(this.shadowRoot)
     }
-}
+
+    saveData() {
+        console.log('Saving...')
+    }
+})
 ```
 :::
 

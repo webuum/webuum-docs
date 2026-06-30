@@ -123,10 +123,10 @@ In the shadow DOM, parts are declared using the standard `part` attribute — wi
 </template>
 ```
 
-The `static parts` map covers the light DOM of the host element. To bind parts inside a shadow root, call `defineParts` (and `definePartsObserver` if you want the part callbacks) on the shadow root:
+The `static parts` map covers the light DOM of the host element. To bind parts inside a shadow root, call `defineParts` (and `defineObserver` if you want the part callbacks) on the shadow root:
 
 ```js
-import { WebuumElement, defineParts, definePartsObserver } from 'webuum'
+import { WebuumElement, defineParts, defineObserver } from 'webuum'
 
 customElements.define('x-hello-world', class extends WebuumElement {
     constructor() {
@@ -136,7 +136,7 @@ customElements.define('x-hello-world', class extends WebuumElement {
         $foo: null,
       })
 
-      definePartsObserver(this.shadowRoot, shadowParts)
+      defineObserver(this.shadowRoot, shadowParts)
     }
   }
 )

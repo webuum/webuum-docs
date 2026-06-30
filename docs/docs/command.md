@@ -184,7 +184,7 @@ customElements.define('x-popover', class extends WebuumElement {
 
 #### Notes
 - Use command for simple action buttons and `addEventListener` for everything else.
-- Event listeners on or inside a host element don't need to be removed on disconnect, these on outside (eg. window) should be though
+- Pass [`this.$signal`](/docs/element#cleanup-with-signal) as the `signal` option to every `addEventListener` — it removes the listener on disconnect and re-arms it cleanly on reconnect, avoiding leaks (eg. on `window`) and duplicate listeners after an ajax reload
 - Event listeners on child elements should be defined on [Part](/docs/parts) elements and their connected callbacks, so they work even on disconnecting inside the custom element (eg. ajax reload)
 
 ## Command in Shadow DOM
@@ -195,7 +195,7 @@ When using the command attribute inside a Shadow DOM, Webuum provides support to
 
 This allows you to use clean and simple markup inside your custom elements without manually wiring event listeners to the host.
 
-`WebuumElement` observes only the light DOM of the host automatically — to enable this behavior inside a shadow root, call `defineCommandObserver` on the shadow root:
+`WebuumElement` observes only the light DOM of the host automatically — to enable this behavior inside a shadow root, call `defineObserver` on the shadow root:
 
 ::: code-group
 ```html
@@ -206,12 +206,12 @@ This allows you to use clean and simple markup inside your custom elements witho
 </x-my-component>
 ```
 ```js
-import { WebuumElement, defineCommandObserver } from 'webuum'
+import { WebuumElement, defineObserver } from 'webuum'
 
 customElements.define('x-my-component', class extends WebuumElement {
     constructor() {
         super()
-        defineCommandObserver(this.shadowRoot)
+        defineObserver(this.shadowRoot)
     }
 
     saveData() {

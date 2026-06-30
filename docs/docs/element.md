@@ -45,6 +45,40 @@ The `connectedCallback()` runs when the element is added to the page — and `di
 
 You can also use the other [lifecycle methods](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#custom_element_lifecycle_callbacks) provided by Custom Elements, like `attributeChangedCallback()` if needed.
 
+## Cleanup with `$signal`
+
+`WebuumElement` exposes a lifecycle-bound `$signal` — an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) you can pass to any abortable API, such as `addEventListener` or `fetch`. When the element is disconnected, Webuum aborts the signal for you, so those listeners are removed automatically — no manual teardown needed.
+
+This is especially handy for listeners on global targets like `window` or `document`, which would otherwise leak if they aren't removed on disconnect.
+
+```js
+import { WebuumElement } from 'webuum'
+
+customElements.define('x-scroll-spy', class extends WebuumElement {
+  connectedCallback() {
+    // Automatically removed when the element disconnects
+    window.addEventListener('scroll', () => {
+      console.log('scrolling', window.scrollY)
+    }, { signal: this.$signal })
+  }
+})
+```
+
+Under the hood, `$signal` is backed by a lazily-created `$controller` ([`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)), which is aborted in `disconnectedCallback`. If the element is reconnected and you read `$signal` again, a fresh signal is created — so the same component keeps working after being moved in the DOM.
+
+::: warning
+If you override `disconnectedCallback`, call `super.disconnectedCallback()` to keep the automatic cleanup — otherwise the controller won't be aborted.
+
+```js
+disconnectedCallback() {
+  super.disconnectedCallback()
+  // your own cleanup
+}
+```
+:::
+
+When using [Customized Built-in Elements](#customized-built-in-elements) or the [Composition Definition](#composition-definition) approach, call `defineSignal()` to enable `$signal` and abort `this.$controller` yourself in `disconnectedCallback`.
+
 ## Customized Built-in Elements
 
 The Web Components spec allows you not only to define new elements — but also to extend **built-in HTML elements** like `<dialog>`, `<button>`, or `<form>`.
@@ -55,18 +89,24 @@ Unlike standard custom elements that extend `WebuumElement`, when extending buil
 
 ::: code-group
 ```js
-import { initializeController } from 'webuum'
+import { defineElement } from 'webuum'
 
 customElements.define('x-dialog', class extends HTMLDialogElement {
   constructor() {
     super()
-    initializeController(this)
+    defineElement(this)
   }
     
   connectedCallback() {
     this.addEventListener('close', () => {
       console.log('Dialog closed!')
-    })
+    }, { signal: this.$signal })
+  }
+
+  disconnectedCallback() {
+    // Built-in elements don't extend `WebuumElement`, so abort the
+    // lifecycle controller yourself to clean up `$signal` listeners.
+    this.$controller?.abort()
   }
 }, { extends: 'dialog' })
 ```
@@ -107,8 +147,9 @@ Use this approach when:
 import {
   defineCommand,
   defineParts,
-  definePartsObserver,
-  defineProps
+  defineObserver,
+  defineProps,
+  defineSignal
 } from 'webuum'
 
 customElements.define('x-hello-world', class extends HTMLDivElement {
@@ -136,14 +177,21 @@ customElements.define('x-hello-world', class extends HTMLDivElement {
       $fuu: null,
     })
 
-    // Start observing parts dynamically
-    definePartsObserver(this, this.$parts)
-    definePartsObserver(this.shadowRoot, this.$shadowParts)
-
     // Declare props bound to data attributes
     defineProps(this, {
       $buu: null,
     })
+
+    // Observe commands and parts dynamically (light + shadow DOM)
+    defineObserver(this, this.$parts)
+    defineObserver(this.shadowRoot, this.$shadowParts)
+
+    // Optional: enable the lifecycle-bound `$signal`
+    defineSignal(this)
+  }
+
+  disconnectedCallback() {
+    this.$controller?.abort()
   }
 }, { extends: 'div' })
 ```

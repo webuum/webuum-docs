@@ -58,7 +58,7 @@ This makes passing structured data easy and predictable.
 
 ::: code-group
 ```js
-import { WebuumElement, initializeController } from 'webuum'
+import { WebuumElement } from 'webuum'
 
 customElements.define('x-hello-world', class extends WebuumElement {
     static props = {

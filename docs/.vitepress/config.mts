@@ -113,6 +113,15 @@ export default defineConfig({
             // }
           ]
         },
+        {
+          text: 'Helpers',
+          items: [
+            {
+              text: 'Observers',
+              link: '/docs/observers'
+            }
+          ]
+        },
         // {
         //   text: 'Tutorials',
         //   items: [

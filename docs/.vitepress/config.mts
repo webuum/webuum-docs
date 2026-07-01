@@ -10,7 +10,7 @@ const ogUrl = 'https://webuum.dev'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   vite: {
-    plugins: [llmstxt()],
+    plugins: [llmstxt(), groupIconVitePlugin()],
   },
   title: "Webuum",
   description: ogDescription,
@@ -162,9 +162,4 @@ export default defineConfig({
       md.use(groupIconMdPlugin)
     },
   },
-  vite: {
-    plugins: [
-      groupIconVitePlugin()
-    ],
-  }
 })
